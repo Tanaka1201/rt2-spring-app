@@ -52,10 +52,9 @@ public class LoginService {
 		LoginResultBean loginResultBean = null;
 		Employee employee = repository.findByEmpIdAndEmpPass(loginForm.getEmpId(), loginForm.getEmpPass());
 
-		
+		EmployeeBean loginUser = BeanManager.copyEntityToBean(employee);
 
-		if (employee != null) {
-			EmployeeBean loginUser = BeanManager.copyEntityToBean(employee);
+		if (loginUser != null) {
 			loginResultBean = LoginResultBean.succeedLogin(loginUser);
 		} else {
 			loginResultBean = LoginResultBean.failLogin("社員ID、またはパスワードが間違っています。");
